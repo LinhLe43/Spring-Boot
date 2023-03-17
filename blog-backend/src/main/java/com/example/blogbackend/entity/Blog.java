@@ -49,7 +49,7 @@ public class Blog {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private Account account;
 
     @ManyToMany
     @JoinTable(name = "blog_category",

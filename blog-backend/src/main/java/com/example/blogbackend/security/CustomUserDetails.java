@@ -1,6 +1,6 @@
 package com.example.blogbackend.security;
 
-import com.example.blogbackend.entity.User;
+import com.example.blogbackend.entity.Account;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,24 +18,24 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CustomUserDetails implements UserDetails {
-    private User user;
+    private Account account;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> roles = new ArrayList<>();
-        user.getRoles().forEach(role -> roles.add(new SimpleGrantedAuthority("ROLE_" + role))); // ROLE_USER, ROLE_ADMIN
+        account.getRoles().forEach(role -> roles.add(new SimpleGrantedAuthority("ROLE_" + role))); // ROLE_USER, ROLE_ADMIN
 
         return roles;
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return account.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getEmail();
+        return account.getEmail();
     }
 
     @Override

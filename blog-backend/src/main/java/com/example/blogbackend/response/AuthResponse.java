@@ -1,6 +1,6 @@
 package com.example.blogbackend.response;
 
-import com.example.blogbackend.entity.User;
+import com.example.blogbackend.entity.Account;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class AuthResponse implements Serializable {
-    private User user;
+    private Account account;
     private String token;
     @JsonProperty("isAuthenticated")
     private boolean isAuthenticated;

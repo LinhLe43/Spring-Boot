@@ -1,13 +1,13 @@
 package com.example.blogbackend;
 
+import com.example.blogbackend.entity.Account;
 import com.example.blogbackend.entity.Blog;
 import com.example.blogbackend.entity.Category;
 import com.example.blogbackend.entity.Comment;
-import com.example.blogbackend.entity.User;
 import com.example.blogbackend.repository.BlogRepository;
 import com.example.blogbackend.repository.CategoryRepository;
 import com.example.blogbackend.repository.CommentRepository;
-import com.example.blogbackend.repository.UserRepository;
+import com.example.blogbackend.repository.AccountRepository;
 import com.github.javafaker.Faker;
 import com.github.slugify.Slugify;
 import org.junit.jupiter.api.Test;
@@ -19,13 +19,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @SpringBootTest
 public class InitDataTest {
 
     @Autowired
-    private UserRepository userRepository;
+    private AccountRepository accountRepository;
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -47,26 +46,26 @@ public class InitDataTest {
 
     @Test
     void save_user() {
-        // Tạo user role admin
+        // Tạo account role admin
         for (int i = 0; i < 3; i++) {
-            User user = User.builder()
+            Account account = Account.builder()
                     .name(faker.name().fullName())
                     .email(faker.internet().emailAddress())
                     .password(passwordEncoder.encode("111"))
                     .roles(List.of("USER", "ADMIN"))
                     .build();
-            userRepository.save(user);
+            accountRepository.save(account);
         }
 
-        // Tạo user bình thường
+        // Tạo account bình thường
         for (int i = 0; i < 10; i++) {
-            User user = User.builder()
+            Account account = Account.builder()
                     .name(faker.name().fullName())
                     .email(faker.internet().emailAddress())
                     .password(passwordEncoder.encode("111"))
                     .roles(List.of("USER"))
                     .build();
-            userRepository.save(user);
+            accountRepository.save(account);
         }
     }
 
@@ -84,16 +83,16 @@ public class InitDataTest {
     void save_blog() {
         Random rd = new Random();
 
-        List<User> users = userRepository.findAll();
-        List<User> usersHasRoleAdmin = users.stream()
+        List<Account> accounts = accountRepository.findAll();
+        List<Account> usersHasRoleAdmin = accounts.stream()
                 .filter(user -> user.getRoles().contains("ADMIN"))
                 .toList();
 
         List<Category> categories = categoryRepository.findAll();
 
         for (int i = 0; i < 30; i++) {
-            // Random 1 user
-            User rdUser = usersHasRoleAdmin.get(rd.nextInt(usersHasRoleAdmin.size()));
+            // Random 1 account
+            Account rdAccount = usersHasRoleAdmin.get(rd.nextInt(usersHasRoleAdmin.size()));
 
             // Random 1 ds category
             Set<Category> rdListCategory = new HashSet<>();
@@ -110,7 +109,7 @@ public class InitDataTest {
                     .description(faker.lorem().sentence(30))
                     .content(faker.lorem().sentence(100))
                     .status(rd.nextInt(2) == 1)
-                    .user(rdUser)
+                    .account(rdAccount)
                     .categories(rdListCategory)
                     .build();
 
@@ -122,19 +121,19 @@ public class InitDataTest {
     void save_comment() {
         Random rd = new Random();
 
-        List<User> users = userRepository.findAll();
+        List<Account> accounts = accountRepository.findAll();
         List<Blog> blogs = blogRepository.findAll();
 
         for (int i = 0; i < 100; i++) {
-            // Random 1 user
-            User rdUser = users.get(rd.nextInt(users.size()));
+            // Random 1 account
+            Account rdAccount = accounts.get(rd.nextInt(accounts.size()));
 
             // Random 1 blog
             Blog rdBlog = blogs.get(rd.nextInt(blogs.size()));
 
             Comment comment = Comment.builder()
                     .content(faker.lorem().sentence(10))
-                    .user(rdUser)
+                    .account(rdAccount)
                     .blog(rdBlog)
                     .build();
 

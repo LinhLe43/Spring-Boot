@@ -29,7 +29,7 @@ public class Image {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private Account account;
 
     @PrePersist
     public void prePersist() {

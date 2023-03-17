@@ -44,7 +44,7 @@ public class CustomFilter extends OncePerRequestFilter {
             return;
         }
 
-        // Lấy thông tin của user dựa trên email
+        // Lấy thông tin của account dựa trên email
         String email = claims.getSubject();
         UserDetails userDetails = customUserDetailsService.loadUserByUsername(email);
 

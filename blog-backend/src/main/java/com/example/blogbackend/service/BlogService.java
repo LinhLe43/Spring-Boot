@@ -1,12 +1,12 @@
 package com.example.blogbackend.service;
 
+import com.example.blogbackend.entity.Account;
 import com.example.blogbackend.entity.Blog;
 import com.example.blogbackend.entity.Category;
-import com.example.blogbackend.entity.User;
 import com.example.blogbackend.exception.NotFoundException;
 import com.example.blogbackend.repository.BlogRepository;
 import com.example.blogbackend.repository.CategoryRepository;
-import com.example.blogbackend.repository.UserRepository;
+import com.example.blogbackend.repository.AccountRepository;
 import com.example.blogbackend.request.UpsertBlogRequest;
 import com.github.slugify.Slugify;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class BlogService {
     private CategoryRepository categoryRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private AccountRepository accountRepository;
 
     @Autowired
     private Slugify slugify;
@@ -49,12 +49,12 @@ public class BlogService {
         // Lấy ra ds category tương ứng (từ ds id gửi lên)
         Set<Category> categories = categoryRepository.findByIdIn(request.getCategoryIds());
 
-        // Lấy ra ai là người tạo bài viết này --> chính là user đang login
+        // Lấy ra ai là người tạo bài viết này --> chính là account đang login
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userEmail = authentication.getName();
 
-        User user = userRepository.findByEmail(userEmail).orElseThrow(() -> {
-            throw new NotFoundException("Not found user with email = " + userEmail);
+        Account account = accountRepository.findByEmail(userEmail).orElseThrow(() -> {
+            throw new NotFoundException("Not found account with email = " + userEmail);
         });
 
         // Tạo bài viết
@@ -65,7 +65,7 @@ public class BlogService {
                 .description(request.getDescription())
                 .thumbnail(request.getThumbnail())
                 .status(request.getStatus())
-                .user(user)
+                .account(account)
                 .categories(categories)
                 .build();
 
