@@ -19,7 +19,7 @@ public class AccessDeniedHandlerCustom implements AccessDeniedHandler {
         // Tạo đối tượng cần trả về
         ErrorMessage message = new ErrorMessage(HttpStatus.FORBIDDEN, "Bạn không có quyền");
 
-        // Convert sang
+        // Convert sang dạng Json
         ObjectMapper objectMapper = new ObjectMapper();
         String messageJSON = objectMapper.writeValueAsString(message);
 
