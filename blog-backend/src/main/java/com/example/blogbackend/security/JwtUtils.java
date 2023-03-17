@@ -27,7 +27,7 @@ public class JwtUtils {
 
     // Sinh token
     public String generateToken(UserDetails userDetails) {
-        // Lưu thông tin của account vào claims
+        // Lưu thông tin của user vào claims
         Map<String, Object> claims = new HashMap<>();
         claims.put("authorities", userDetails.getAuthorities());
 

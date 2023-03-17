@@ -39,7 +39,7 @@ public class AuthService {
 
             CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-            return new AuthResponse(userDetails.getAccount(), token, true);
+            return new AuthResponse(userDetails.getUser(), token, true);
         } catch (AuthenticationException e) {
             throw new RuntimeException("Email hoặc password không chính xác");
         }

@@ -1,7 +1,7 @@
 package com.example.blogbackend.security;
 
-import com.example.blogbackend.entity.Account;
-import com.example.blogbackend.repository.AccountRepository;
+import com.example.blogbackend.entity.User;
+import com.example.blogbackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,13 +14,13 @@ import java.util.Optional;
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private AccountRepository accountRepository;
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<Account> userOptional = accountRepository.findByEmail(email);
+        Optional<User> userOptional = userRepository.findByEmail(email);
         if(userOptional.isEmpty()) {
-            throw new UsernameNotFoundException("Not found account with email = " + email);
+            throw new UsernameNotFoundException("Not found user with email = " + email);
         }
 
         return new CustomUserDetails(userOptional.get());

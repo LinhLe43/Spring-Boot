@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("api/admin")
 public class UserController {
-    // 1. Lấy danh sách account
+    // 1. Lấy danh sách user
 
-    // 2. Lấy chi tiết account theo id
+    // 2. Lấy chi tiết user theo id
 
-    // 3. Tạo mới account
+    // 3. Tạo mới user
 
-    // 4. Cập nhật account
+    // 4. Cập nhật user
 
-    // 5. Xóa account
+    // 5. Xóa user
 }

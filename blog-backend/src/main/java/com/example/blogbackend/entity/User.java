@@ -15,12 +15,12 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "account")
+@Table(name = "user")
 @TypeDef(
         name = "json",
         typeClass = JsonStringType.class
 )
-public class Account implements Serializable {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
