@@ -21,7 +21,4 @@ public class AuthController {
         return authService.login(request);
     }
 }
-<<<<<<< HEAD
-=======
-424234
->>>>>>> linhld/branch2
+testst
