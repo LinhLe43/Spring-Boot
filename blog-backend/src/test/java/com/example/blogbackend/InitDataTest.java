@@ -1,9 +1,9 @@
 package com.example.blogbackend;
 
+import com.example.blogbackend.entity.User;
 import com.example.blogbackend.entity.Blog;
 import com.example.blogbackend.entity.Category;
 import com.example.blogbackend.entity.Comment;
-import com.example.blogbackend.entity.User;
 import com.example.blogbackend.repository.BlogRepository;
 import com.example.blogbackend.repository.CategoryRepository;
 import com.example.blogbackend.repository.CommentRepository;
@@ -19,7 +19,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @SpringBootTest
 public class InitDataTest {

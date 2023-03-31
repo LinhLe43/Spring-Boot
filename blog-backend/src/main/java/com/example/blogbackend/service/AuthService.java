@@ -1,6 +1,5 @@
 package com.example.blogbackend.service;
 
-import com.example.blogbackend.entity.User;
 import com.example.blogbackend.request.LoginRequest;
 import com.example.blogbackend.response.AuthResponse;
 import com.example.blogbackend.security.CustomUserDetails;
@@ -13,10 +12,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @Service
 public class AuthService {
